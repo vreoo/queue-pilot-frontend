@@ -1,5 +1,5 @@
 import React from "react";
-import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { makeRequest } from "../axios";
 import { useLocation } from "react-router-dom";
 
