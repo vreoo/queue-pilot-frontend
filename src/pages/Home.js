@@ -10,15 +10,18 @@ function Home() {
         status: "Open",
     });
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
 
     const handleChange = (e) => {
         setQueue((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
     const createQueue = async (e) => {
+        e.preventDefault();
         try {
             await axios.post("http://localhost:8800/api/queues/create", queue);
             setError(null);
+            setSuccess("Queue created successfully!");
         } catch (error) {
             setError(error.response.data);
         }
@@ -59,10 +62,14 @@ function Home() {
                         {error && (
                             <div className="alert alert-danger">{error}</div>
                         )}
+                        {success && (
+                            <div className="alert alert-success">{success}</div>
+                        )}
                         {/* Create Queue Button */}
                         <button
                             className="btn btn-primary w-100"
                             onClick={createQueue}
+                            disabled={queue.name === ""}
                         >
                             Create Queue
                         </button>
