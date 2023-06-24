@@ -4,23 +4,11 @@ import { makeRequest } from "../axios";
 import { useLocation } from "react-router-dom";
 
 function Profile() {
-    const queryClient = useQueryClient();
-
     const userId = parseInt(useLocation().pathname.split("/")[2]);
     const { isLoading, error, data } = useQuery(["user"], () =>
         makeRequest.get("/users/find/" + userId).then((res) => {
             return res.data;
         })
-    );
-
-    // queueId is the id of the queue that the user is joining
-    const { mutate } = useMutation(
-        (queueId) => makeRequest.post("/users/join/" + queueId),
-        {
-            onSuccess: () => {
-                queryClient.invalidateQueries("user");
-            },
-        }
     );
 
     return (
