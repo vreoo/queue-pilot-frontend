@@ -1,0 +1,3 @@
+[submodule "queue-pilot-backend"]
+	path = queue-pilot-backend
+	url = https://github.com/vreoo/queue-pilot-backend.git
